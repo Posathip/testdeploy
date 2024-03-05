@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps Plot Graph Example</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <style>
+        /* Set the size of the map */
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Create a div element to hold the map -->
+    <div id="map"></div>
+
+    <script>
+        // Initialize and display the map
+        function initMap() {
+            // Create a map centered at a specific location
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: {lat: 14.53333, lng: 100.91667}
+            });
+
+            // Create a polyline (line) between two points
+    var locations = [
+        {lat: 14.53333, lng: 100.91667, info: 'Station A,THAQI = 150'},
+        {lat: 14.6, lng: 100.87, info: 'Station B, THAQI = 150'},
+        {lat: 14.55, lng: 100.77, info: 'Station C, THAQI = 150'},
+    ];
+    
+
+    // Loop through the locations and place a marker for each one, with an info window
+    locations.forEach(function(location) {
+        var marker = new google.maps.Marker({
+            position: {lat: location.lat, lng: location.lng},
+            map: map
+        });
+
+        // Create an info window for each marker
+        var infoWindow = new google.maps.InfoWindow({
+            content: location.info
+            
+        });
+
+        // Add a click listener to the marker to show the info window
+        marker.addListener('click', function() {
+            infoWindow.open(map, marker);
+        });
+    });
+}
+    </script>
+    <!-- Load the map asynchronously with the API key and call initMap() -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB6T5wtzVhabGlY3zQIn1LJ_aMohMXYj8&callback=initMap"></script>
+</body>
+</html>
